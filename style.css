@@ -91,6 +91,8 @@ textarea {
 }
 .radio-header .header-option {
     text-align: center;
+    font-weight: 600;
+    color: #4b5563;
 }
 
 /* Setiap Baris Riwayat Penyakit */
@@ -118,6 +120,20 @@ textarea {
     margin: 0 auto; 
     padding: 0;
     width: auto;
+}
+
+/* Make radio inputs consistent size and center within their grid cells */
+.input-group-radio input[type="radio"],
+.input-group-kebiasaan input[type="radio"] {
+    justify-self: center;
+    width: 18px;
+    height: 18px;
+}
+
+/* Ensure radio option containers let child inputs participate in the grid
+   but keep a small horizontal gap for visual breathing room when needed */
+.radio-options {
+    display: contents;
 }
 
 /* Sembunyikan label yang tidak diperlukan untuk tata letak grid */
@@ -337,4 +353,51 @@ button[type="submit"]:hover {
 @media (min-width:901px) and (max-width:1200px) {
     .hero-right svg { max-width: 380px; transform: translateX(4%); }
     .hero-title { font-size:40px; }
+}
+
+/* --- Mobile-specific tweaks --- */
+@media (max-width:600px) {
+    form {
+        padding: 20px;
+    }
+    .section-title { font-size:15px; }
+    .radio-header, .input-group-radio {
+        grid-template-columns: 1fr 50px 50px;
+        font-size: 13px;
+    }
+    .kebiasaan-header, .input-group-kebiasaan {
+        grid-template-columns: 1fr 45px 45px 140px;
+        font-size: 13px;
+    }
+    .input-group-kebiasaan input[type="text"] { width: 100%; }
+    .input-group-radio input[type="radio"], .input-group-kebiasaan input[type="radio"] {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+@media (max-width:420px) {
+    form {
+        padding: 14px;
+    }
+    /* Stack label and radio options vertically for narrow screens */
+    .radio-header, .input-group-radio {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+    .radio-header { border-bottom-width: 1px; }
+    .radio-header .header-option { display: inline-block; margin-left: 8px; }
+    .input-group-radio .item-label { margin-bottom: 6px; }
+    .input-group-radio .radio-options {
+        display: flex;
+        gap: 18px;
+        justify-content: flex-end;
+        align-items: center;
+        width: 100%;
+    }
+    .input-group-kebiasaan, .kebiasaan-header {
+        grid-template-columns: 1fr;
+    }
+    .input-group-kebiasaan input[type="text"] { width: 100%; margin-top: 8px; }
+    .input-group-kebiasaan .header-kebiasaan-option { display: inline-block; margin-left: 8px; }
 }
