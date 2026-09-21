@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi MCU - PT SAMCO FARMA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #f4f7fa;
+            color: #1e293b;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* --- NAVBAR --- */
+        nav {
+            background: #ffffff;
+            padding: 12px 60px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-brand {
+            color: #e11d48;
+            font-weight: 700;
+            font-size: 1.2rem;
+            border-left: 2px solid #e2e8f0;
+            padding-left: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-logo-img {
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        /* --- CONTAINER --- */
+        .container {
+            flex: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        /* --- HERO CARD --- */
+        .hero-card {
+            position: relative;
+            width: 100%;
+            background: url('wallpaper_dashboard.jpg') no-repeat center center/cover;
+            background-color: #ffffff;
+            border-radius: 24px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            min-height: 500px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Gradasi lebih halus untuk kesan premium */
+            background: linear-gradient(90deg, rgba(255,255,255,1) 35%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            padding: 60px 80px;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .hero-content h2 {
+            font-size: 0.95rem;
+            color: #64748b;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #0f172a;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .hero-content p {
+            font-size: 1.15rem;
+            color: #475569;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .period-badge {
+            display: inline-block;
+            background: #f1f5f9;
+            color: #475569;
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+        }
+
+        /* --- TOMBOL --- */
+        .btn-primary {
+            background-color: #4f46e5;
+            color: #ffffff;
+            padding: 18px 45px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+        }
+
+        .btn-primary:hover {
+            background-color: #3730a3;
+            transform: translateY(-3px);
+            box-shadow: 0 20px 30px -10px rgba(79, 70, 229, 0.5);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #94a3b8;
+            font-size: 0.85rem;
+            border-top: 1px solid #e2e8f0;
+            background: #ffffff;
+        }
+
+        @media (max-width: 900px) {
+            nav { padding: 10px 20px; }
+            .hero-content { padding: 40px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .nav-brand { display: none; } /* Sembunyikan teks di mobile agar tidak sesak */
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-left">
+            <img src="logo_kanan.jpeg" alt="Galaxy Medical Center" class="nav-logo-img">
+            <div class="nav-brand">Halaman MCU</div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="hero-card">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2>PT. SAMCO FARMA</h2>
+                <h1>Portal Registrasi Medical Check Up</h1>
+                <p>Silakan melengkapi <strong>Formulir Anamnesa</strong> untuk melanjutkan prosedur pemeriksaan kesehatan.</p>
+                <div class="period-badge">Periode Pelaksanaan: Tahun 2026</div>
+                
+                <a href="Form_Anamnesa.html" class="btn-primary">Mulai Pengisian Formulir</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 Sistem Manajemen MCU - Layanan Kesehatan
+    </footer>
+
+</body>
+</html>

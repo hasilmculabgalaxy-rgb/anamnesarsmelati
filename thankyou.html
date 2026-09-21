@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Registrasi - Anamnesa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f1f5f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .thankyou-card {
+            background: white;
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            text-align: center;
+            max-width: 450px;
+            width: 90%;
+        }
+
+        .thankyou-card h1 { 
+            color: #0f172a; 
+            font-size: 24px; 
+            margin-bottom: 8px;
+            font-weight: 800;
+        }
+
+        .thankyou-card h2 { 
+            color: #4f46e5; 
+            margin: 0; 
+            font-size: 22px;
+            text-transform: uppercase;
+        }
+
+        .company { 
+            font-weight: 600; 
+            color: #64748b; 
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .qrcode-box {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 16px;
+            border: 2px dashed #e2e8f0;
+            display: inline-block;
+            margin: 20px 0;
+        }
+
+        .note {
+            color: #94a3b8;
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Group Tombol Modern */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #4338ca 100%);
+            color: white !important;
+            padding: 14px 28px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .btn-outline {
+            background: white;
+            color: #475569 !important;
+            padding: 12px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            border: 2px solid #e2e8f0;
+            transition: all 0.2s ease;
+        }
+
+        .btn-outline:hover {
+            background: #f8fafc;
+            border-color: #cbd5e1;
+            color: #1e293b !important;
+        }
+
+        @media (min-width: 480px) {
+            .button-group {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thankyou-card">
+        <h1>Registrasi Berhasil</h1>
+        <h2 id="participant-name-display">Memuat...</h2>
+        <p class="company">PT GOBEL DHARMA SARANA KARYA (GDSK)</p>
+        
+        <p style="color: #475569; font-size: 14px;">Formulir Anamnesa Anda telah divalidasi oleh sistem.</p>
+
+        <div id="qrcode-display" class="qrcode-box"></div>
+
+        <p class="note">
+            <strong>Instruksi:</strong> Silakan unduh kartu registrasi atau tangkap layar (screenshot) kode QR ini untuk proses verifikasi saat MCU.
+        </p>
+
+        <div class="button-group">
+            <button class="btn-primary" id="btn-download">Unduh Kartu Registrasi</button>
+            <a class="btn-outline" href="index.html">Selesai</a>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+    <script>
+        const storedQR = localStorage.getItem('anamnesa_qr') || 'NO_DATA';
+        const storedName = localStorage.getItem('anamnesa_name') || 'PESERTA';
+        const nameEl = document.getElementById('participant-name-display');
+        const qrcodeEl = document.getElementById('qrcode-display');
+
+        nameEl.textContent = storedName.toUpperCase();
+
+        // Render QR Code
+        const qrGenerator = new QRCode(qrcodeEl, {
+            text: storedQR,
+            width: 200,
+            height: 200,
+            colorDark : "#0f172a",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+
+        document.getElementById('btn-download').addEventListener('click', async () => {
+            const btn = document.getElementById('btn-download');
+            btn.innerText = "Memproses...";
+            btn.disabled = true;
+
+            const getQRImage = () => {
+                const img = qrcodeEl.querySelector('img');
+                if (img && img.src) return Promise.resolve(img);
+                const cvs = qrcodeEl.querySelector('canvas');
+                const image = new Image();
+                image.src = cvs.toDataURL('image/png');
+                return new Promise(resolve => image.onload = () => resolve(image));
+            };
+
+            try {
+                const qrImage = await getQRImage();
+                const canvasW = 1000;
+                const canvasH = 1300;
+                const canvasOut = document.createElement('canvas');
+                canvasOut.width = canvasW;
+                canvasOut.height = canvasH;
+                const ctx = canvasOut.getContext('2d');
+
+                // Base Design
+                ctx.fillStyle = '#ffffff';
+                ctx.fillRect(0, 0, canvasW, canvasH);
+                
+                // Header Gradient Area
+                const grad = ctx.createLinearGradient(0, 0, canvasW, 0);
+                grad.addColorStop(0, '#4f46e5');
+                grad.addColorStop(1, '#4338ca');
+                ctx.fillStyle = grad;
+                ctx.fillRect(0, 0, canvasW, 300);
+
+                // Text Header
+                ctx.fillStyle = '#ffffff';
+                ctx.textAlign = 'center';
+                ctx.font = 'bold 50px Poppins, Arial';
+                ctx.fillText('KARTU REGISTRASI MCU', canvasW / 2, 130);
+                ctx.font = '600 25px Poppins, Arial';
+                ctx.fillText('PT GOBEL DHARMA SARANA KARYA (GDSK)', canvasW / 2, 190);
+
+                // Body Section
+                ctx.fillStyle = '#94a3b8';
+                ctx.font = '600 24px Poppins, Arial';
+                ctx.fillText('NAMA PESERTA', canvasW / 2, 400);
+
+                ctx.fillStyle = '#1e293b';
+                ctx.font = '800 60px Poppins, Arial';
+                ctx.fillText(storedName.toUpperCase(), canvasW / 2, 480);
+
+                // QR Container
+                const qrSize = 500;
+                const qrX = (canvasW - qrSize) / 2;
+                const qrY = 580;
+                
+                // Soft Shadow QR
+                ctx.shadowColor = 'rgba(0,0,0,0.1)';
+                ctx.shadowBlur = 40;
+                ctx.fillStyle = '#ffffff';
+                ctx.beginPath();
+                ctx.roundRect ? ctx.roundRect(qrX - 30, qrY - 30, qrSize + 60, qrSize + 60, 30) : ctx.rect(qrX-30, qrY-30, qrSize+60, qrSize+60);
+                ctx.fill();
+                ctx.shadowBlur = 0; // Reset shadow
+
+                ctx.drawImage(qrImage, qrX, qrY, qrSize, qrSize);
+
+                // Footer Info
+                ctx.fillStyle = '#64748b';
+                ctx.font = '400 22px Poppins, Arial';
+                ctx.fillText('Tunjukkan kartu ini pada petugas pendaftaran.', canvasW / 2, 1180);
+                
+                // Timestamp
+                const now = new Date().toLocaleString('id-ID');
+                ctx.font = 'italic 18px Poppins, Arial';
+                ctx.fillText('Dicetak pada: ' + now, canvasW / 2, 1230);
+
+                // Trigger Download
+                const link = document.createElement('a');
+                link.download = `Kartu_MCU_${storedName.replace(/\s+/g, '_')}.png`;
+                link.href = canvasOut.toDataURL('image/png');
+                link.click();
+            } catch (err) {
+                alert("Gagal mengunduh kartu. Silakan coba lagi.");
+            } finally {
+                btn.innerText = "Unduh Kartu Registrasi";
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

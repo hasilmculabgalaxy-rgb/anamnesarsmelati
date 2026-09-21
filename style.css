@@ -1,0 +1,340 @@
+/* --- 1. Reset dan Gaya Body Dasar --- */
+/* Load Google Fonts for improved typography */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@600;700;800&display=swap');
+
+body {
+    /* Use Inter for body text and Poppins for headings */
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    line-height: 1.4;
+    display: block;
+    min-height: 100vh;
+    padding: 0;
+    margin: 0;
+}
+
+/* --- 2. Gaya Kontainer Form Utama --- */
+form {
+    background-color: #ffffff;
+    padding: 30px 40px;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 800px; 
+    margin: 0 auto; /* center the form element within its container */
+}
+
+/* Centering wrapper for the form page */
+#form-container {
+    max-width: 960px; /* limit how wide the content area can grow */
+    margin: 28px auto; /* center horizontally and give vertical spacing */
+    padding: 12px; /* small breathing room around the form */
+}
+
+/* --- 3. Gaya Header Utama dan Section Title --- */
+.form-header {
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+h1 {
+    color: #007bff;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+    font-family: 'Poppins', 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+.section-title {
+    color: #495057;
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 5px;
+}
+
+/* --- 4. Gaya Input dan Label Identitas --- */
+label {
+    display: block; 
+    margin-bottom: 5px; 
+    margin-top: 15px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea {
+    width: 100%; 
+    padding: 8px;
+    border: 1px solid #ced4da; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+    font-size: 14px;
+}
+
+/* --- 5. Gaya Tabel Radio Button (Riwayat Penyakit) --- */
+
+/* Header untuk kolom 'Ada/Tidak Ada' */
+.radio-header {
+    display: grid;
+    grid-template-columns: 1fr 60px 60px; /* Label | Ada | Tidak Ada */
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+.radio-header .header-option {
+    text-align: center;
+}
+
+/* Setiap Baris Riwayat Penyakit */
+.input-group-radio {
+    display: grid;
+    grid-template-columns: 1fr 60px 60px; /* Label | Radio Ada | Radio Tidak Ada */
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.input-group-radio .item-label {
+    margin: 0;
+    padding-right: 10px;
+    font-weight: normal;
+}
+
+.radio-options {
+    display: contents; 
+}
+
+.radio-options input[type="radio"] {
+    display: block;
+    margin: 0 auto; 
+    padding: 0;
+    width: auto;
+}
+
+/* Sembunyikan label yang tidak diperlukan untuk tata letak grid */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+/* --- 6. Gaya Kebiasaan (Mirip Tabel Horizontal) --- */
+/* Header Khusus untuk Kebiasaan */
+.kebiasaan-header {
+    display: grid;
+    /* HARUS SAMA DENGAN input-group-kebiasaan: 1fr | 50px | 50px | 200px */
+    grid-template-columns: 1fr 50px 50px 200px; 
+    font-weight: bold;
+    border-bottom: 2px solid #000;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+.kebiasaan-header .header-kebiasaan-option {
+    text-align: center;
+}
+.kebiasaan-header .header-kebiasaan-input {
+    text-align: left; /* Teks "Bila Ya" harus rata kiri */
+    padding-left: 10px;
+}
+
+.input-group-kebiasaan {
+    display: grid;
+    grid-template-columns: 1fr 50px 50px 200px; /* Label | Tidak | Ya | Input Teks */
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.input-group-kebiasaan .item-label {
+    margin: 0;
+    font-weight: normal;
+}
+.input-group-kebiasaan input[type="radio"] {
+    display: block;
+    margin: 0 auto;
+    width: auto;
+}
+.input-group-kebiasaan input[type="text"] {
+    width: 95%;
+}
+
+/* --- 7. Gaya Persetujuan Karyawan --- */
+.pernyataan-container {
+    margin-top: 30px;
+    padding: 15px;
+    border: 1px solid #007bff;
+    border-radius: 4px;
+    background-color: #e9f5ff;
+}
+.pernyataan-container p {
+    font-size: 12px;
+    color: #495057;
+    margin-bottom: 10px;
+}
+.pernyataan-label {
+    display: inline;
+    font-weight: normal;
+}
+
+
+/* --- 8. Gaya Tombol Submit & Status --- */
+button[type="submit"] {
+    background-color: #28a745; 
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 4px; 
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 30px;
+    font-weight: 600;
+    transition: background-color 0.3s;
+    width: 100%; 
+}
+
+button[type="submit"]:hover {
+    background-color: #218838; 
+}
+
+#pesanStatus {
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 14px;
+}
+#pesanStatus[style*="green"] {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* --- Site nav and Hero (landing) --- */
+.site-nav { width:100%; background:transparent; padding:18px 24px; box-sizing:border-box; }
+.site-nav .nav-inner { max-width:1100px; margin:0 auto; display:flex; justify-content:space-between; align-items:center; }
+.site-nav .brand { color:#ff6b6b; font-weight:700; }
+.site-nav .nav-link a { color:#343a40; text-decoration:none; }
+
+.hero {
+    width:100%;
+    max-width:1100px;
+    min-height:460px;
+    margin:18px auto;
+    display:grid;
+    grid-template-columns: 1fr 420px; /* text left, wallpaper right */
+    align-items:center;
+    box-sizing:border-box;
+    background-image: url('wallpaper_dashboard.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center right;
+    padding: 30px 24px;
+    position:relative;
+    overflow:hidden;
+    border-radius: 12px;
+}
+
+/* subtle white overlay so text stays readable */
+.hero::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; right: 0; bottom: 0;
+    /* stronger left overlay so text remains readable over the wallpaper */
+    background: linear-gradient(to right, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.90) 40%, rgba(255,255,255,0.35) 70%);
+    pointer-events: none;
+}
+
+.hero-left { padding:32px 28px; max-width:520px; margin:0; text-align:left; position:relative; z-index:2; display:flex; flex-direction:column; justify-content:center; }
+.hero-title { font-family: 'Poppins', 'Segoe UI', Roboto, Arial, sans-serif; font-size:56px; margin:0 0 8px; color:#111; line-height:1; letter-spacing:-0.6px; font-weight:800; }
+.hero-sub { color:#6c757d; font-size:18px; margin-bottom:10px; font-weight:400; }
+.hero-sub strong { display:block; color:#111; font-weight:700; margin-top:8px; }
+.hero-right { display:flex; justify-content:center; align-items:center; position:relative; z-index:1; }
+
+/* Make the decorative illustration scale nicely and sit slightly to the right */
+.hero-right svg {
+    max-width: 460px;
+    width: 100%;
+    height: auto;
+    transform: translateX(6%);
+}
+
+.hero-cta { margin-top: 18px; display:inline-block; }
+
+/* Ensure hero CTA is compact and left-aligned inside the hero column */
+.hero .btn-primary.hero-cta,
+.hero-left > .btn-primary.hero-cta {
+    display:inline-block;
+    width:auto;
+    max-width:260px;
+    padding:12px 20px;
+    text-align:center;
+    align-self:flex-start; /* keep button at left edge of the hero column */
+}
+
+/* Footer spacing so content doesn't feel cramped */
+.site-footer { margin-top: 28px; padding: 18px 0; }
+
+.site-footer { width:100%; padding:18px 0; color:#8a8a8a; text-align:center; }
+
+/* Nav layout tweaks */
+.site-nav { width:100%; background:rgba(255,255,255,0.92); padding:10px 0; box-sizing:border-box; box-shadow: 0 6px 18px rgba(0,0,0,0.06); position:sticky; top:0; z-index:40; }
+.site-nav .nav-inner { max-width:1100px; margin:0 auto; display:flex; align-items:center; gap:12px; padding:0 20px; }
+.site-nav .brand { color:#ff6b6b; font-weight:700; }
+.site-nav .nav-center { margin:0 auto; }
+.site-nav .nav-center a { color:#343a40; text-decoration:none; font-weight:600; padding:8px 14px; border-radius:8px; }
+.site-nav .nav-center a.btn-cta { background:#5b6be6; color:#fff; }
+.site-nav .nav-right { color:#8a8a8a; }
+
+/* Nav logo and left cluster */
+.nav-left { display:flex; align-items:center; gap:10px; }
+.nav-logo { width:40px; height:40px; object-fit:contain; border-radius:6px; background:transparent; }
+.nav-logo.left { margin-left:0; }
+.nav-logo.right { margin-right:0; }
+.brand { font-weight:700; color:#ff6b6b; font-size:18px; }
+
+/* Buttons */
+.btn-primary { display:inline-block; background:#5b6be6; color:#fff; padding:12px 20px; border-radius:8px; text-decoration:none; font-weight:700; }
+.btn-outline { display:inline-block; background:transparent; border:1px solid #ced4da; color:#343a40; padding:10px 16px; border-radius:8px; text-decoration:none; }
+
+/* Thank you page */
+.thankyou-card { max-width:720px; margin:40px auto; background:#fff; padding:32px; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,0.06); text-align:center; }
+.thankyou-card h1 { font-size:32px; color:#343a40; margin-bottom:6px; }
+.thankyou-card h2 { font-size:36px; color:#007bff; margin:8px 0 12px; }
+.thankyou-card .company { font-weight:700; margin-bottom:6px; }
+.qrcode-box { width:260px; height:260px; margin:18px auto; display:flex; align-items:center; justify-content:center; }
+.small { font-size:13px; color:#6c757d; }
+
+/* Required field marker */
+.required-star {
+    color: #e11d48;
+    margin-left: 6px;
+    font-weight: 700;
+}
+.label-required { display: inline-flex; align-items: center; gap:6px; }
+
+/* Responsive tweaks */
+@media (max-width:900px) {
+    .hero { grid-template-columns: 1fr; padding:20px; }
+    .hero-title { font-size:32px; }
+    .hero-right { display:none; }
+}
+
+@media (min-width:901px) and (max-width:1200px) {
+    .hero-right svg { max-width: 380px; transform: translateX(4%); }
+    .hero-title { font-size:40px; }
+}
